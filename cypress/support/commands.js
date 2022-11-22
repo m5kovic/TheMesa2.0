@@ -22,3 +22,11 @@ Cypress.Commands.add("loginSession", (email, password) => {
     );
   });
 });
+
+Cypress.Commands.add("visitBaseURL", () => {
+  cy.visit("https://cy.app-dev.themesa.org/login");
+  cy.intercept(
+    "https://api-dev.themesa.org/api/65c21d0a-bac7-48af-acd8-69f6a0115c34/Feeds/realhome?page=1&limit=7"
+  ).as("feed");
+  cy.wait("@feed");
+});
